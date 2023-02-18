@@ -1,0 +1,28 @@
+# Yolo generated files and models
+runs/
+*.pt
+
+# Images
+*.jpeg
+*.png
+
+# macOS files
+.DS_Store
+
+# HPC files
+*.sh.e*
+*.sh.o*
+README_IMPERIAL_RDS.txt
+*.pbs
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
