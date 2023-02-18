@@ -26,7 +26,7 @@ def detect_food_items(input):
     cls_np = np.expand_dims(cls_tensor.detach().numpy(), axis=0)
     names_dict = model.names
     to_np = np.vectorize(lambda i: names_dict[i])
-    labels = np.asarray(to_np(cls_np))
+    labels = (np.asarray(to_np(cls_np))).flatten()
 
     # extract mask element
     mask_data = results[0].masks.data # raw masks tensor (N, H, W)
