@@ -19,6 +19,13 @@ def detect_food_items(input):
     # classes: classes included in search (0 = bowl, 1 = omelette, 2 = plate)
     results = model.predict(source=input)
 
+    # get normalized width and height
+    pos_tensor = results[0].boxes.xywhn
+
+    # convert to numpy array and delete coordinates of box
+    pos_np = pos_tensor.detach().numpy()
+    dims = np.delete(pos_np, [0, 1], axis=1)
+
     # get identified classes
     cls_tensor = results[0].boxes.cls
 
@@ -32,15 +39,16 @@ def detect_food_items(input):
     mask_data = results[0].masks.data # raw masks tensor (N, H, W)
 
     # create empty np array for object areas
-    area_np = np.empty(shape=labels.size, dtype=float)
+    areas = np.empty(shape=labels.size, dtype=float)
 
     # iterate through elements in tensor and extract mask size
     for i in range(mask_data.shape[0]):
         mask_zero = (mask_data[i] == 0).sum()
         mask_one = (mask_data[i] == 1).sum()
         area_tensor = mask_one / (mask_zero + mask_one)
-        area_np[i] = area_tensor.detach().numpy()
+        areas[i] = area_tensor.detach().numpy()
 
-    return area_np, labels
+    return labels, areas, dims
 
 print(detect_food_items("./02_local_testing/omelette_1.jpeg"))
+
