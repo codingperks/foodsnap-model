@@ -1,9 +1,10 @@
-#PBS -lwalltime=08:00:00
-#PBS -lselect=1:ncpus=256:mem=920gb:ompthreads=256
- 
+#PBS -lwalltime=07:58:00
+#PBS -lselect=1:ncpus=128:mem=512gb:ompthreads=128
+
+module purge 
 module load anaconda3/personal
-source activate yolo_01
-python $HOME/01_HPC/yolo_train.py
+source activate cpu_01
+python $HOME/foodsnap-backend-model/01_HPC/train_cpu.py
 
 cd $TMPDIR
 mkdir $WORK/$PBS_JOBID
