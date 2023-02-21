@@ -18,7 +18,7 @@ time_start = time.perf_counter()
 #param patience = epochs to wait for no observable improvement (to stop early)
 #param cache = caching (default false) with possible values (True, False, ram, disk)
 #param device = device to run on (cuda 0,1,N) or cpu - take out if cpu training, device=0,1,2,3,4,5,6,7
-results = model.train(data='/rds/general/user/jcp22/home/foodsnap_data/data.yaml', epochs=100, imgsz=640, patience=25, device=0)
+results = model.train(data='/rds/general/user/jcp22/home/foodsnap_data/data.yaml', epochs=100, imgsz=640, device=0, batch=16)
 
 #arguments for experimentation
 #device=0
